@@ -1,2 +1,58 @@
-Add Theme
-<!-- TODO -->
+<div class="w-full w-full py-10 px-5 md:px-10">
+    <div class="text-center mb-10">
+      <h1 class="font-bold text-3xl text-[#2B3467]">Créer Un Thème</h1>
+    </div>
+    <form [formGroup]="themeForm">
+      <!-- Temporary Photo Input -->
+      <div class="flex -mx-3">
+        <div class="w-full px-3 mb-5">
+          <label for="" class="text-lg font-bold text-[#2B3467] px-1"
+            >Image du thème</label
+          >
+          <div class="flex">
+            <div
+              class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"
+            >
+              <i class="fa-sharp fa-solid fa-image text-gray-400 text-lg"></i>
+            </div>
+            <input
+              type="text"
+              class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+              [formControlName]="'quizImage'"
+              placeholder="Entrez l'URL de l'image"
+            />
+          </div>
+        </div>
+      </div>
+  
+      <div class="flex -mx-3">
+        <div class="w-full px-3 mb-5">
+          <label for="" class="text-lg font-bold text-[#2B3467] px-1"
+            >Nom du thème</label
+          >
+          <div class="flex">
+            <div
+              class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"
+            >
+              <i
+                class="fa-regular fa-game-board-simple text-gray-400 text-lg"
+              ></i>
+            </div>
+            <input
+              type="text"
+              class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+              [formControlName]="'quizName'"
+              placeholder="Entrez le nom du thème"
+            />
+          </div>
+        </div>
+      </div>
+      <div></div>
+      <button
+        class="block w-full max-w-md mx-auto text-3xl bg-[#2B3467] focus:bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-900 focus:outline-none focus:shadow-outline py-4 px-8" (click)="addTheme()"
+      >
+        Sauvegarder
+      </button>
+    </form>
+  </div>
+  
