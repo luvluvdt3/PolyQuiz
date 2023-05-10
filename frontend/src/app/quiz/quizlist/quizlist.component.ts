@@ -162,7 +162,17 @@ export class QuizListComponent implements OnInit {
       title: 'Sélectionnez le thème',
       input: 'select',
       inputOptions: inputOptions,
-      showCancelButton: true,
+      showDenyButton: true,
+      showCancelButton: false,
+      width: 1700,
+      // customClass: {
+      //   footer: 'bg-gray-100	',
+      // },
+      padding: '4em',
+      confirmButtonText:
+        '<span id="oui" style="font-size: 100px; padding: 120px 120px;">Oui</span>',
+      denyButtonText:
+        '<span id="non" style="font-size: 100px; padding: 120px 120px;">Non</span>',
     });
 
     if (theme) {
