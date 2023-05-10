@@ -39,6 +39,8 @@ import { QuestionCreateComponent } from './admin/addQuiz/question-create/questio
 import { AddQuizComponent } from './admin/addQuiz/add-quiz.component';
 import { PlayedQuizAdminComponent } from './admin/statsResident/playedQuizAdmin/played-quiz-admin.component';
 import { ModifResidentComponent } from './admin/modifResident/modif-resident.component';
+import { MatDialogModule } from '@angular/material/dialog';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -84,6 +86,7 @@ import { ModifResidentComponent } from './admin/modifResident/modif-resident.com
     FormsModule,
     IvyCarouselModule,
     NgChartsModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

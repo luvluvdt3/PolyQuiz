@@ -6,6 +6,7 @@ import { AuthService } from 'src/services/auth.service';
 import { User } from 'src/models/user.model';
 import Swal from 'sweetalert2';
 import { QuizListComponent } from 'src/app/quiz/quizlist/quizlist.component';
+
 @Component({
   selector: 'app-main',
   templateUrl: './mainpage.component.html',
