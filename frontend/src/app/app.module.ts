@@ -39,6 +39,8 @@ import { QuestionCreateComponent } from './admin/addQuiz/question-create/questio
 import { AddQuizComponent } from './admin/addQuiz/add-quiz.component';
 import { PlayedQuizAdminComponent } from './admin/statsResident/playedQuizAdmin/played-quiz-admin.component';
 import { ModifResidentComponent } from './admin/modifResident/modif-resident.component';
+import { NgxSmartModalModule } from 'ngx-smart-modal';
+import { HelpModalComponent } from './helpModal/help-modal.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -75,6 +77,7 @@ import { ModifResidentComponent } from './admin/modifResident/modif-resident.com
     AddQuizComponent,
     PlayedQuizAdminComponent,
     ModifResidentComponent,
+    HelpModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -84,7 +87,9 @@ import { ModifResidentComponent } from './admin/modifResident/modif-resident.com
     FormsModule,
     IvyCarouselModule,
     NgChartsModule,
+    NgxSmartModalModule.forRoot(),
   ],
+  entryComponents: [HelpModalComponent],
   providers: [],
   bootstrap: [AppComponent],
 })
