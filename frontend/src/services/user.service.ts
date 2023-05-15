@@ -5,7 +5,6 @@ import { User } from '../models/user.model';
 import { Resident } from '../models/resident.model';
 import { serverUrl, httpOptionsBase } from '../configs/server.config';
 import { Router } from '@angular/router';
-import { OptionsScreenComponent } from 'src/app/settings/options-screen.component';
 import Swal from 'sweetalert2';
 import { InitSettingService } from './initsettings.service';
 @Injectable({
@@ -22,11 +21,7 @@ export class UserService {
     Resident[]
   >([]);
 
-  constructor(
-    private http: HttpClient,
-    private router: Router,
-    private options: OptionsScreenComponent
-  ) {
+  constructor(private http: HttpClient, private router: Router) {
     //TODO: Simplify later to only get one necessary user and not the whole list :v
     this.retrieveUsers();
     this.retrieveResidents();
@@ -139,29 +134,5 @@ export class UserService {
 
   userExists(name: string): boolean {
     return this.users.find((user) => user.userName == name) != undefined;
-  }
-
-  settingsForUser(user: User) {
-    for (let userInList of this.users) {
-      if (userInList.userName == user.userName) {
-        user.id = userInList.id;
-      }
-    }
-    for (let residentInList of this.residents) {
-      if (residentInList.userId == user.id) {
-        if (
-          residentInList.symptome.includes('akinesie') &&
-          residentInList.symptome.includes('rigidite') &&
-          residentInList.symptome.includes('tremblement')
-        ) {
-          //
-        } else if (
-          residentInList.symptome.includes('akinesie') &&
-          residentInList.symptome.includes('rigidite')
-        ) {
-          console.log('geko moria');
-        }
-      }
-    }
   }
 }
