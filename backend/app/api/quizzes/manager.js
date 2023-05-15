@@ -3,8 +3,7 @@ const { filterQuestionsFromQuizz } = require("./questions/manager");
 const { filterAnswersFromQuestion } = require("./questions/answers/manager");
 
 /**
- * Function buildQuizz.
- * This function aggregates the questions and answers from the database to build a quizz with all the data needed by the clients.
+ * Méthode qui va permettre de créer un quiz en fonction de son id, en se servant des données de la base de données.
  * @param quizId
  */
 const buildQuizz = (quizId) => {
@@ -12,21 +11,23 @@ const buildQuizz = (quizId) => {
   const questions = filterQuestionsFromQuizz(quiz.id);
   const questionWithAnswers = questions.map((question) => {
     const answers = filterAnswersFromQuestion(question.id);
-    return { ...question, answers };
+    return Object.assign({}, question, { answers });
   });
-  return { ...quiz, questions: questionWithAnswers };
+  //Création d'un nouvel objet contenant les propriétés du quiz et les propriétés des questions avec les réponses.
+  return Object.assign({}, quiz, { questions: questionWithAnswers });
 };
 
 /**
- * Function buildQuizzes.
- * This function aggregates the questions and answers from the database to build entire quizzes.
+ * Méthode qui va permettre de créer tous les quiz
  */
 const buildQuizzes = () => {
   const quizzes = Quiz.get();
-  return quizzes.map((quiz) => buildQuizz(quiz.id));
+  const quizzesWithData = quizzes.map((quiz) => buildQuizz(quiz.id));
+  return quizzesWithData;
 };
 
+//Exportation des méthodes buildQuizz et buildQuizzes.
 module.exports = {
-  buildQuizz,
-  buildQuizzes,
+  buildQuizz: buildQuizz,
+  buildQuizzes: buildQuizzes,
 };
