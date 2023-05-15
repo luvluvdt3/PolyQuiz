@@ -5,6 +5,7 @@ import { User } from '../models/user.model';
 import { Resident } from '../models/resident.model';
 import { serverUrl, httpOptionsBase } from '../configs/server.config';
 import { Router } from '@angular/router';
+import { OptionsScreenComponent } from 'src/app/settings/options-screen.component';
 import Swal from 'sweetalert2';
 import { InitSettingService } from './initsettings.service';
 @Injectable({
@@ -21,7 +22,11 @@ export class UserService {
     Resident[]
   >([]);
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private options: OptionsScreenComponent
+  ) {
     //TODO: Simplify later to only get one necessary user and not the whole list :v
     this.retrieveUsers();
     this.retrieveResidents();
