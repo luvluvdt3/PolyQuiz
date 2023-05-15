@@ -61,8 +61,8 @@
     <!-- Temporary Photo Input -->
     <div class="flex -mx-3">
       <div class="w-full px-3 mb-5">
-        <label for="" class="text-lg font-bold text-[#2B3467] px-1"
-          >Photo du résident</label
+        <label class="text-lg font-bold text-[#2B3467] px-1" for=""
+        >Photo du résident</label
         >
         <div class="flex">
           <div
@@ -71,20 +71,21 @@
             <i class="fa-sharp fa-solid fa-image text-gray-400 text-lg"></i>
           </div>
           <input
-            type="text"
-            class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
             [formControlName]="'avatar'"
+            class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
             placeholder="Entrez l'URL de la photo"
+            type="text"
           />
         </div>
-        <img [src]="residentForm.value.avatar" *ngIf="residentForm.value.avatar" class="mx-auto object-cover rounded-lg" alt="Resident image">
+        <img *ngIf="residentForm.value.avatar" [src]="residentForm.value.avatar" alt="Resident image"
+             class="mx-auto object-cover rounded-lg">
       </div>
     </div>
 
     <div class="flex -mx-3">
       <div class="w-full px-3 mb-5">
-        <label for="" class="text-lg font-bold text-[#2B3467] px-1"
-          >Nom du résident</label
+        <label class="text-lg font-bold text-[#2B3467] px-1" for=""
+        >Nom du résident</label
         >
         <div class="flex">
           <div
@@ -93,16 +94,16 @@
             <i class="fa-regular fa-input-text text-gray-400 text-lg"></i>
           </div>
           <input
-            type="text"
             [formControlName]="'lastName'"
             class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
             placeholder="John"
+            type="text"
           />
         </div>
       </div>
       <div class="w-full px-3 mb-5">
-        <label for="" class="text-lg font-bold text-[#2B3467] px-1"
-          >Prénom du résident</label
+        <label class="text-lg font-bold text-[#2B3467] px-1" for=""
+        >Prénom du résident</label
         >
         <div class="flex">
           <div
@@ -111,42 +112,42 @@
             <i class="mdi mdi-account-outline text-gray-400 text-lg"></i>
           </div>
           <input
-            type="text"
             [formControlName]="'firstName'"
             class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
             placeholder="Doe"
+            type="text"
           />
         </div>
       </div>
     </div>
     <div class="flex -mx-3">
       <div class="w-full px-3 mb-5">
-        <label for="" class="text-lg font-bold text-[#2B3467] px-1"
-          >Sexe du résident</label
+        <label class="text-lg font-bold text-[#2B3467] px-1" for=""
+        >Sexe du résident</label
         >
         <div class="flex items-center">
           <div class="mr-4 rounded-md bg-indigo-200 p-2">
             <input
-              type="radio"
               class="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
               formControlName="sexe"
               name="sexe"
+              type="radio"
               value="feminin"
             />
-            <label for="feminin" class="ml-2 text-sm text-gray-600"
-              >Féminin</label
+            <label class="ml-2 text-sm text-gray-600" for="feminin"
+            >Féminin</label
             >
           </div>
           <div class="mr-4 rounded-md bg-indigo-200 p-2">
             <input
-              type="radio"
               class="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
               formControlName="sexe"
               name="sexe"
+              type="radio"
               value="masculin"
             />
-            <label for="masculin" class="ml-2 text-sm text-gray-600"
-              >Masculin</label
+            <label class="ml-2 text-sm text-gray-600" for="masculin"
+            >Masculin</label
             >
           </div>
         </div>
@@ -155,25 +156,25 @@
 
     <div class="flex -mx-3">
       <div class="w-full px-3 mb-5">
-        <label for="symptome" class="text-lg font-bold text-[#2B3467] px-1"
-          >Symptôme(s) du résident</label
+        <label class="text-lg font-bold text-[#2B3467] px-1" for="symptome"
+        >Symptôme(s) du résident</label
         >
         <div class="flex items-center">
           <div
-            class="mr-4 rounded-md bg-indigo-200 p-2"
             *ngFor="let symptome of symptomes"
+            class="mr-4 rounded-md bg-indigo-200 p-2"
           >
             <input
-              type="checkbox"
+              (change)="changeState(symptome.id)"
+              [checked]="symptome.checked"
+              [value]="symptome.value"
               class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
               name="symptome"
-              [value]="symptome.value"
-              [checked]="symptome.checked"
-              (change)="changeState(symptome.id)"
+              type="checkbox"
             />
-            <label for="symptome" class="ml-2 text-sm text-gray-600">{{
+            <label class="ml-2 text-sm text-gray-600" for="symptome">{{
               symptome.name
-            }}</label>
+              }}</label>
           </div>
         </div>
       </div>
@@ -181,8 +182,23 @@
 
     <div class="flex -mx-3">
       <div class="w-full px-3 mb-5">
-        <label for="" class="text-lg font-bold text-[#2B3467] px-1"
-          >Date de naissance du résident</label
+        <label class="text-lg font-bold text-[#2B3467] px-1" for=""
+        >Template de settings</label
+        >
+        <select class="form-control" formControlName="template">
+          <option value="default">Par défaut</option>
+          <option value="template2">Clics imprécis</option>
+          <option value="template3">Utilisation clavier</option>
+          <option value="template4">Navigation vocale</option>
+        </select>
+      </div>
+    </div>
+
+
+    <div class="flex -mx-3">
+      <div class="w-full px-3 mb-5">
+        <label class="text-lg font-bold text-[#2B3467] px-1" for=""
+        >Date de naissance du résident</label
         >
         <div class="flex">
           <div
@@ -191,18 +207,18 @@
             <i class="fa-regular fa-calendar-days text-gray-400 text-lg"></i>
           </div>
           <input
-            type="date"
             [formControlName]="'dateOfBirth'"
             class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
             placeholder="01/01/1990"
+            type="date"
           />
         </div>
       </div>
     </div>
     <div class="flex -mx-3">
       <div class="w-full px-3 mb-5">
-        <label for="" class="text-lg font-bold text-[#2B3467] px-1"
-          >Pseudonyme</label
+        <label class="text-lg font-bold text-[#2B3467] px-1" for=""
+        >Pseudonyme</label
         >
         <div class="flex">
           <div
@@ -211,18 +227,18 @@
             <i class="fa-solid fa-user text-gray-400 text-lg"></i>
           </div>
           <input
-            type="text"
             [formControlName]="'userName'"
             class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
             placeholder="JohnDoe123"
+            type="text"
           />
         </div>
       </div>
     </div>
     <div class="flex -mx-3">
       <div class="w-full px-3 mb-5">
-        <label for="" class="text-lg font-bold text-[#2B3467] px-1"
-          >Mot de passe</label
+        <label class="text-lg font-bold text-[#2B3467] px-1" for=""
+        >Mot de passe</label
         >
         <div class="flex">
           <div
@@ -231,10 +247,10 @@
             <i class="fa-solid fa-lock text-gray-400 text-lg"></i>
           </div>
           <input
-            type="password"
             [formControlName]="'password'"
             class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
             placeholder="************"
+            type="password"
           />
         </div>
       </div>
@@ -242,8 +258,8 @@
 
     <div class="flex -mx-3">
       <div class="w-full px-3 mb-5">
-        <label for="" class="text-lg font-bold text-[#2B3467] px-1"
-          >Confirmer le mot de passe</label
+        <label class="text-lg font-bold text-[#2B3467] px-1" for=""
+        >Confirmer le mot de passe</label
         >
         <div class="flex">
           <div
@@ -252,9 +268,9 @@
             <i class="fa-solid fa-lock text-gray-400 text-lg"></i>
           </div>
           <input
-            type="password"
             class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
             placeholder="************"
+            type="password"
           />
         </div>
       </div>
@@ -264,8 +280,8 @@
     <div class="flex -mx-3">
       <div class="w-full px-3 mb-5">
         <button
-          class="block w-full max-w-xs mx-auto text-xl bg-indigo-800 focus:bg-indigo-600 text-white rounded-lg px-3 py-2 font-semibold hover:bg-indigo-900 focus:outline-none focus:shadow-outline"
           (click)="addResident()"
+          class="block w-full max-w-xs mx-auto text-xl bg-indigo-800 focus:bg-indigo-600 text-white rounded-lg px-3 py-2 font-semibold hover:bg-indigo-900 focus:outline-none focus:shadow-outline"
         >
           Enregistrer
         </button>

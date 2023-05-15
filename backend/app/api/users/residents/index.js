@@ -23,12 +23,12 @@ router.get("/:residentNum", (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
-    const { id } = req.body;
+    const { id, template } = req.body;
     const existingResident = await Resident.findOne({ id });
     if (existingResident) {
       return res.status(409).json({ error: "Resident already exists" });
     }
-    const resident = Resident.create({ ...req.body });
+    const resident = Resident.create({ ...req.body, template });
     res.status(201).json(resident);
   } catch (err) {
     console.log(err);

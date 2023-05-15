@@ -1,8 +1,9 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/services/user.service';
 import { User } from 'src/models/user.model';
 import { Resident } from 'src/models/resident.model';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -20,6 +21,7 @@ export class RegisterComponent implements OnInit {
     { name: 'Rigidité', value: 'rigidite', id: 2, checked: false },
     { name: 'Autres', value: 'autres', id: 3, checked: false },
   ];
+
   constructor(
     private userService: UserService,
     private formBuilder: FormBuilder
@@ -39,6 +41,7 @@ export class RegisterComponent implements OnInit {
           Validators.required,
         ],
       ],
+      template: ['', Validators.required],
       userType: 'patient',
       avatar: [''],
     });
@@ -72,6 +75,7 @@ export class RegisterComponent implements OnInit {
     console.log(resident);
     this.userService.createResident(resident, user);
   }
+
   changeState(id: number) {
     this.symptomes[id].checked = !this.symptomes[id].checked;
     const symptomeArray = this.symptomes

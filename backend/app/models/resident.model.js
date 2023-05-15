@@ -7,4 +7,5 @@ module.exports = new BaseModel("Resident", {
   sexe: Joi.string().required(),
   symptome: Joi.array().required(),
   dateOfBirth: Joi.date().raw().required(),
+  template: Joi.string().required(),
 });
