@@ -6,6 +6,7 @@ import { Resident } from '../models/resident.model';
 import { serverUrl, httpOptionsBase } from '../configs/server.config';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { InitSettingService } from './initsettings.service';
 @Injectable({
   providedIn: 'root',
 })
@@ -133,5 +134,29 @@ export class UserService {
 
   userExists(name: string): boolean {
     return this.users.find((user) => user.userName == name) != undefined;
+  }
+
+  settingsForUser(user: User) {
+    for (let userInList of this.users) {
+      if (userInList.userName == user.userName) {
+        user.id = userInList.id;
+      }
+    }
+    for (let residentInList of this.residents) {
+      if (residentInList.userId == user.id) {
+        if (
+          residentInList.symptome.includes('akinesie') &&
+          residentInList.symptome.includes('rigidite') &&
+          residentInList.symptome.includes('tremblement')
+        ) {
+          //
+        } else if (
+          residentInList.symptome.includes('akinesie') &&
+          residentInList.symptome.includes('rigidite')
+        ) {
+          console.log('geko moria');
+        }
+      }
+    }
   }
 }

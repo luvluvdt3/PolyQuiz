@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
     } as User;
     console.log(user);
     if (this.userService.userExists(user.userName)) {
+      this.userService.settingsForUser(user);
       this.authService.login(user);
     } else {
       Swal.fire({
