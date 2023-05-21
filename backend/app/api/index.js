@@ -34,14 +34,22 @@ router.get('/uploads/:filename', (req, res) => {
     }
 });
 
-router.post("/upload", multipartMiddleware, (req, res) => {
-  if (req.files.uploads[0] !== undefined) {
-    var file = req.files.uploads[0].path;
-    var newFile = file.split("/").pop();
-    res.json({
-      filepath: file,
-    });
-  }
+// router.post("/upload", multipartMiddleware, (req, res) => {
+//   if (req.files.uploads[0] !== undefined) {
+//     var file = req.files.uploads[0].path;
+//     var newFile = file.split("/").pop();
+//     res.json({
+//       filepath: file,
+//     });
+//   }
+// });
+
+router.post('/upload', multipartMiddleware, (req, res) => {
+    const uploadFile = req.files.uploads ? req.files.uploads[0] : undefined;
+    if (uploadFile) {
+        const fileName = path.basename(uploadFile.path);
+        res.json({filepath: fileName});
+    }
 });
 
 router.get("/status", (req, res) => res.status(200).json("ok"));
