@@ -11,17 +11,27 @@ const router = new Router();
 const fs = require("fs");
 const multipart = require("connect-multiparty");
 var path = require("path");
-const { Quiz } = require("../models");
+const {Quiz} = require("../models");
 const multipartMiddleware = multipart({
-  uploadDir: "./uploads",
+    uploadDir: "./uploads",
 });
-router.get("/uploads/:fileName", (req, res) => {
-  var file = path.resolve(__dirname + "/../../uploads/" + req.params.fileName);
-  if (fs.existsSync(file)) {
-    res.sendFile(file);
-  } else {
-    res.status(404);
-  }
+
+// router.get("/uploads/:fileName", (req, res) => {
+//   var file = path.resolve(__dirname + "/../../uploads/" + req.params.fileName);
+//   if (fs.existsSync(file)) {
+//     res.sendFile(file);
+//   } else {
+//     res.status(404);
+//   }
+// });
+
+router.get('/uploads/:filename', (req, res) => {
+    const filePath = path.join(__dirname, '../../uploads/', req.params.filename);
+    if (fs.existsSync(filePath)) {
+        res.sendFile(filePath);
+    } else {
+        res.sendStatus(404);
+    }
 });
 
 router.post("/upload", multipartMiddleware, (req, res) => {
