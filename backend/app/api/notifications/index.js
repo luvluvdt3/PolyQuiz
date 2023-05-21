@@ -5,11 +5,20 @@ const manageAllErrors = require("../../utils/routes/error-management");
 
 const router = new Router();
 
-router.get("/", (req, res) => {
+// router.get("/", (req, res) => {
+//   try {
+//     res.status(200).json(Notification.get());
+//   } catch (err) {
+//     manageAllErrors(res, err);
+//   }
+// });
+
+router.get("/", async (req, res) => {
   try {
-    res.status(200).json(Notification.get());
-  } catch (err) {
-    manageAllErrors(res, err);
+    const notifications = await Notification.get();
+    res.status(200).json(notifications);
+  } catch (error) {
+    manageAllErrors(res, error);
   }
 });
 
