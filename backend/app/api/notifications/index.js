@@ -40,12 +40,23 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.get("/:receiverId", (req, res) => {
+// router.get("/:receiverId", (req, res) => {
+//   try {
+//     const notification = Notification.getByUserId(req.params.receiverId);
+//     res.status(200).json(notification);
+//   } catch (err) {
+//     res.status(404).json(err);
+//   }
+// });
+//
+// module.exports = router;
+
+router.get("/:userId", async (req, res) => {
   try {
-    const notification = Notification.getByUserId(req.params.receiverId);
-    res.status(200).json(notification);
-  } catch (err) {
-    res.status(404).json(err);
+    const userNotifications = await Notification.getByUserId(req.params.userId);
+    res.status(200).json(userNotifications);
+  } catch (error) {
+    res.status(404).json(error);
   }
 });
 
