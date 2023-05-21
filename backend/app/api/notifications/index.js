@@ -22,12 +22,21 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", (req, res) => {
+// router.post("/", (req, res) => {
+//   try {
+//     const notification = Notification.create({ ...req.body });
+//     res.status(201).json(notification);
+//   } catch (err) {
+//     manageAllErrors(res, err);
+//   }
+// });
+
+router.post("/", async (req, res) => {
   try {
-    const notification = Notification.create({ ...req.body });
-    res.status(201).json(notification);
-  } catch (err) {
-    manageAllErrors(res, err);
+    const newNotification = await Notification.create(req.body);
+    res.status(201).json(newNotification);
+  } catch (error) {
+    manageAllErrors(res, error);
   }
 });
 
