@@ -21,12 +21,21 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.get("/:themeId", (req, res) => {
-  try {
-    res.status(200).json(Theme.getById(req.params.themeId));
-  } catch (err) {
-    manageAllErrors(res, err);
-  }
+// router.get("/:themeId", (req, res) => {
+//   try {
+//     res.status(200).json(Theme.getById(req.params.themeId));
+//   } catch (err) {
+//     manageAllErrors(res, err);
+//   }
+// });
+
+router.get('/:themeId', async (req, res) => {
+    try {
+        const theme = await Theme.getById(req.params.themeId);
+        res.status(200).json(theme);
+    } catch (err) {
+        manageAllErrors(res, err);
+    }
 });
 
 router.post("/", (req, res) => {
