@@ -7,9 +7,6 @@ const { Router } = require("express");
 const manageAllErrors = require("../../../utils/routes/error-management");
 const { Answer, Quiz, Question } = require("../../../models");
 
-//Affecte le answersRouter au routeur via l'URL quizId/questions/questionId/answers (donc gestion des réponses par ce answersRouteur)
-router.use("/:questionId/answers", AnswersRouter);
-
 //Creation du routeur avec le paramètre mergeParams à true. Cela siginifie que les paramètres de la requête seront conservés.
 const router = new Router({ mergeParams: true });
 
@@ -113,6 +110,9 @@ router.delete("/:questionId", (req, res) => {
     manageAllErrors(res, err);
   }
 });
+
+//Affecte le answersRouter au routeur via l'URL quizId/questions/questionId/answers (donc gestion des réponses par ce answersRouteur)
+router.use("/:questionId/answers", AnswersRouter);
 
 //Exportation du routeur afin de pouvoir l'utiliser dans un autre code js
 module.exports = router;
