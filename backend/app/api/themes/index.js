@@ -56,12 +56,21 @@ router.post('/', async (req, res) => {
     }
 });
 
-router.put("/:themeId", (req, res) => {
-  try {
-    res.status(200).json(Theme.update(req.params.themeId, req.body));
-  } catch (err) {
-    manageAllErrors(res, err);
-  }
+// router.put("/:themeId", (req, res) => {
+//   try {
+//     res.status(200).json(Theme.update(req.params.themeId, req.body));
+//   } catch (err) {
+//     manageAllErrors(res, err);
+//   }
+// });
+
+router.put('/:themeId', async (req, res) => {
+    try {
+        const updatedTheme = await Theme.update(req.params.themeId, req.body);
+        res.status(200).json(updatedTheme);
+    } catch (err) {
+        manageAllErrors(res, err);
+    }
 });
 
 router.delete("/:themeId", (req, res) => {
