@@ -38,13 +38,22 @@ router.get('/:themeId', async (req, res) => {
     }
 });
 
-router.post("/", (req, res) => {
-  try {
-    const theme = Theme.create({ ...req.body });
-    res.status(201).json(theme);
-  } catch (err) {
-    manageAllErrors(res, err);
-  }
+// router.post("/", (req, res) => {
+//   try {
+//     const theme = Theme.create({ ...req.body });
+//     res.status(201).json(theme);
+//   } catch (err) {
+//     manageAllErrors(res, err);
+//   }
+// });
+
+router.post('/', async (req, res) => {
+    try {
+        const theme = await Theme.create({...req.body});
+        res.status(201).json(theme);
+    } catch (err) {
+        manageAllErrors(res, err);
+    }
 });
 
 router.put("/:themeId", (req, res) => {
