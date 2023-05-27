@@ -1,21 +1,19 @@
+//On importe les objets dont on a besoin
 const { Answer } = require("../../../../models");
 const NotFoundError = require("../../../../utils/errors/not-found-error.js");
 const { getQuestionFromQuiz } = require("../manager");
 
 /**
- * filterAnswersFromQuestion.
- * This function filters among the questions to return only the question linked with the given quizId.
- * @param questionId
+ * Méthode qui renvoit la liste des réponses associées à la question ayant pour id questionId
  */
-const filterAnswersFromQuestion = (questionId) =>
-  Answer.get().filter((answer) => answer.questionId === questionId);
+const filterAnswersFromQuestion = (questionId) => {
+  const answers = Answer.get();
+  const parsedId = parseInt(questionId, 10);
+  return answers.filter((answer) => answer.questionId === questionId);
+};
 
 /**
- * getAnswerFromQuestion.
- * This function retrieves an answer from a question. It will throw a not found exception if the questionId in the answer is different from the one provided in parameter.
- * @param quizId
- * @param questionId
- * @param answerId
+ * Méthode qui permet de récupérer une réponse d'une question en fonction de l'id du quiz de la question, de l'id de la question et de l'id de la réponse.
  */
 const getAnswerFromQuestion = (quizId, questionId, answerId) => {
   const question = getQuestionFromQuiz(quizId, questionId);
@@ -27,6 +25,7 @@ const getAnswerFromQuestion = (quizId, questionId, answerId) => {
   return answer;
 };
 
+//Exportation des méthodes
 module.exports = {
   getAnswerFromQuestion,
   filterAnswersFromQuestion,
