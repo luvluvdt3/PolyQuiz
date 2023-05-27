@@ -1,4 +1,4 @@
-//Imports de la classe. Cette
+//Imports de la classe. Ce fichier est lié à la gestion des routes pour les questions.
 
 const AnswersRouter = require("./answers");
 const { filterQuestionsFromQuizz, getQuestionFromQuiz } = require("./manager");
@@ -99,10 +99,9 @@ router.put("/:questionId", (req, res) => {
   }
 });
 
-//Suppression (DELETE) du quiz ayant pour id quizId
+//Suppression (DELETE) de la question ayant pour id questionId
 router.delete("/:questionId", (req, res) => {
   try {
-    // Check if the question id exists & if the question has the same quizId as the one provided in the url.
     getQuestionFromQuiz(req.params.quizId, req.params.questionId);
     Question.delete(req.params.questionId);
     res.status(204).end();
