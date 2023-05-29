@@ -21,13 +21,22 @@ router.get("/", async (req, res) => {
     }
 });
 
-router.post("/", (req, res) => {
-  try {
-    const settings = Settings.create({ ...req.body });
-    res.status(201).json(settings);
-  } catch (err) {
-    manageAllErrors(res, err);
-  }
+// router.post("/", (req, res) => {
+//   try {
+//     const settings = Settings.create({ ...req.body });
+//     res.status(201).json(settings);
+//   } catch (err) {
+//     manageAllErrors(res, err);
+//   }
+// });
+
+router.post("/", async (req, res) => {
+    try {
+        const settings = Settings.create({...req.body});
+        res.status(201).json(settings);
+    } catch (err) {
+        manageAllErrors(res, err);
+    }
 });
 
 router.get('/:user_id', (req, res) => {
