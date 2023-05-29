@@ -21,9 +21,18 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", (req, res) => {
+// router.post("/", (req, res) => {
+//   try {
+//     const initSettings = InitSettings.create({ ...req.body });
+//     res.status(201).json(initSettings);
+//   } catch (err) {
+//     manageAllErrors(res, err);
+//   }
+// });
+
+router.post("/", async (req, res) => {
   try {
-    const initSettings = InitSettings.create({ ...req.body });
+    const initSettings = InitSettings.create({...req.body});
     res.status(201).json(initSettings);
   } catch (err) {
     manageAllErrors(res, err);
