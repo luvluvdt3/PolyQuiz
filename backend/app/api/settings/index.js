@@ -1,16 +1,24 @@
-const { Router } = require("express");
+const {Router} = require("express");
 
-const { Settings } = require("../../models");
+const {Settings} = require("../../models");
 const manageAllErrors = require("../../utils/routes/error-management");
 
 const router = new Router();
 
-router.get("/", (req, res) => {
-  try {
-    res.status(200).json(Settings.get());
-  } catch (err) {
-    manageAllErrors(res, err);
-  }
+// router.get("/", (req, res) => {
+//   try {
+//     res.status(200).json(Settings.get());
+//   } catch (err) {
+//     manageAllErrors(res, err);
+//   }
+// });
+
+router.get("/", async (req, res) => {
+    try {
+        res.status(200).json(Settings.get());
+    } catch (err) {
+        manageAllErrors(res, err);
+    }
 });
 
 router.post("/", (req, res) => {
