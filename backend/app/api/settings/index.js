@@ -39,14 +39,24 @@ router.post("/", async (req, res) => {
     }
 });
 
-router.get('/:user_id', (req, res) => {
-  try {
-    const user_id = parseInt(req.params.user_id); 
-    const settings = Settings.findOne({ user_id });
-    res.status(200).json(settings);
-  } catch (err) {
-    res.status(404).json(err);
-  }
+// router.get('/:user_id', (req, res) => {
+//     try {
+//         const user_id = parseInt(req.params.user_id);
+//         const settings = Settings.findOne({user_id});
+//         res.status(200).json(settings);
+//     } catch (err) {
+//         res.status(404).json(err);
+//     }
+// });
+
+router.get('/:user_id', async (req, res) => {
+    try {
+        const user_id = parseInt(req.params.user_id);
+        const settings = Settings.findOne({user_id});
+        res.status(200).json(settings);
+    } catch (err) {
+        res.status(404).json(err);
+    }
 });
 
 router.put('/:user_id', (req, res) => {
