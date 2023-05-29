@@ -59,15 +59,28 @@ router.get('/:user_id', async (req, res) => {
     }
 });
 
-router.put('/:user_id', (req, res) => {
-  try {
-    const user_id = parseInt(req.params.user_id); 
-    const settings = Settings.findOne({ user_id });;
-    const result = Settings.update(settings.id, req.body);
-    res.status(200).json(result)
-  } catch (err) {
-    manageAllErrors(res, err);
-  }
+// router.put('/:user_id', (req, res) => {
+//     try {
+//         const user_id = parseInt(req.params.user_id);
+//         const settings = Settings.findOne({user_id});
+//
+//         const result = Settings.update(settings.id, req.body);
+//         res.status(200).json(result)
+//     } catch (err) {
+//         manageAllErrors(res, err);
+//     }
+// });
+
+router.put('/:user_id', async (req, res) => {
+    try {
+        const user_id = parseInt(req.params.user_id);
+        const settings = Settings.findOne({user_id});
+
+        const result = Settings.update(settings.id, req.body);
+        res.status(200).json(result)
+    } catch (err) {
+        manageAllErrors(res, err);
+    }
 });
 
 module.exports = router;
