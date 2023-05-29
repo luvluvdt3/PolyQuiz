@@ -1,11 +1,19 @@
-const { Router } = require("express");
+const {Router} = require("express");
 
-const { InitSettings } = require("../../../models");
+const {InitSettings} = require("../../../models");
 const manageAllErrors = require("../../../utils/routes/error-management");
 
 const router = new Router();
 
-router.get("/", (req, res) => {
+// router.get("/", (req, res) => {
+//   try {
+//     res.status(200).json(InitSettings.get());
+//   } catch (err) {
+//     manageAllErrors(res, err);
+//   }
+// });
+
+router.get("/", async (req, res) => {
   try {
     res.status(200).json(InitSettings.get());
   } catch (err) {
