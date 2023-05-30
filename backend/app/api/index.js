@@ -1,3 +1,5 @@
+//Imports de l'index de notre api. Elle va permettre de faire le lien entre les routes et les controllers
+
 const { Router } = require("express");
 const UserRouter = require("./users");
 const ResidentRouter = require("./users/residents");
@@ -11,9 +13,13 @@ const fs = require("fs");
 const multipart = require("connect-multiparty");
 var path = require("path");
 const { Quiz } = require("../models");
+
+// Définition d'un middleware pour gérer les fichiers envoyés
 const multipartMiddleware = multipart({
   uploadDir: "./uploads",
 });
+
+//Récupération (GET) des fichiers envoyés
 router.get("/uploads/:fileName", (req, res) => {
   var file = path.resolve(__dirname + "/../../uploads/" + req.params.fileName);
   if (fs.existsSync(file)) {
@@ -23,6 +29,7 @@ router.get("/uploads/:fileName", (req, res) => {
   }
 });
 
+//Création (POST) des fichiers envoyés
 router.post("/upload", multipartMiddleware, (req, res) => {
   if (req.files.uploads[0] !== undefined) {
     var file = req.files.uploads[0].path;
@@ -34,6 +41,8 @@ router.post("/upload", multipartMiddleware, (req, res) => {
 });
 
 router.get("/status", (req, res) => res.status(200).json("ok"));
+
+//ON affecte chaque routeur crée ici
 router.use("/users", UserRouter);
 router.use("/residents", ResidentRouter);
 router.use("/quizzes", QuizzesRouter);
@@ -41,4 +50,6 @@ router.use("/themes", ThemeRouter);
 router.use("/results", ResultRouter);
 router.use("/settings", Settings);
 router.use("/initsettings", InitSettings);
+
+//Puis on l'exporte
 module.exports = router;
