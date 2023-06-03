@@ -41,6 +41,7 @@ router.post("/", (req, res) => {
 router.put("/:user_id", (req, res) => {
   try {
     const user_id = parseInt(req.params.user_id);
+    //Pas besoin de créer un manager spécifique pour la gestion des settings : la classe mère base-model.js suffit
     const settings = Settings.findOne({ user_id });
     const result = Settings.update(settings.id, req.body);
     res.status(200).json(result);
